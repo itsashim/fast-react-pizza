@@ -1,7 +1,8 @@
 import { formatCurrency } from "../../utils/helpers";
+import PropTypes from "prop-types";
 
 function MenuItem({ pizza }) {
-  const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+  const { name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
   return (
     <li>
@@ -16,5 +17,9 @@ function MenuItem({ pizza }) {
     </li>
   );
 }
+
+MenuItem.propTypes = {
+  pizza: PropTypes.any,
+};
 
 export default MenuItem;
