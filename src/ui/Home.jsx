@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
+
+import CreateUser from "../features/user/CreateUser";
 
 function Home() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline text-red-300">
+    <div className="my-10 sm:my-16 text-center">
+      <h1 className=" font-semibold text-xl mb-8">
         The best pizza.
         <br />
+        <span className="text-yellow-500">
         Straight out of the oven, straight to you.
+        </span>
       </h1>
-      <Link to="/menu">Menu</Link>
+      <CreateUser/>
+  
     </div>
   );
 }
