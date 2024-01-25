@@ -8,7 +8,7 @@ function AppLayout() {
   const useLoader = isLoading.state === "loading";
 
   return (
-    <div className="grid h-screen grid-rows-[auto_1fr_auto]">
+    <div className="grid h-dvh grid-rows-[auto_1fr_auto]">
       {useLoader && <MenuLoader />}
 
       <Header />
