@@ -4,9 +4,9 @@ import { formatCurrency } from "../../utils/helpers";
 import PropTypes from "prop-types";
 import { addItem , getCurrentQuantityById} from "../cart/cartSlice";
 import DeleteItem from "../cart/DeleteItem";
+// import UpdateItemQuantity from "../cart/UpdateItemQuantity";
 
 function MenuItem({ pizza }) {
-  
   const {id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const dispatch = useDispatch()
   const currentQuantity = useSelector(getCurrentQuantityById(id));
@@ -18,13 +18,11 @@ function MenuItem({ pizza }) {
       quantity: 1,
       unitPrice,
       totalPrice: unitPrice * 1
-    }
+    };
     dispatch(addItem(newItem));
   }
 
-
-  return (
-    <li className="flex gap-4 py-2">
+  return (<li className="flex gap-4 py-2">
       <img
         className={`h-24 ${soldOut ? "opacity-70 grayscale" : ""}`}
         src={imageUrl}
@@ -45,11 +43,15 @@ function MenuItem({ pizza }) {
           )}
           {
            renderDelete &&
+           <>
+            {/* <UpdateItemQuantity pizzaId={id} quantity={currentQuantity}></UpdateItemQuantity> */}
             <DeleteItem pizzaId={id}/>
+           </>
           }
            
           
-          {!soldOut && !renderDelete && <Button onClick={handleAddCartItem} type="small">Add to cart</Button> }
+          {!soldOut && !renderDelete && <>
+           <Button onClick={handleAddCartItem} type="small">Add to cart</Button> </>}
         </div>
       </div>
     </li>
