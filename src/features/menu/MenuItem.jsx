@@ -4,6 +4,7 @@ import { formatCurrency } from "../../utils/helpers";
 import PropTypes from "prop-types";
 import { addItem , getCurrentQuantityById} from "../cart/cartSlice";
 import DeleteItem from "../cart/DeleteItem";
+import UpdateItemQuantity from "../cart/UpdateItemQuantity";
 // import UpdateItemQuantity from "../cart/UpdateItemQuantity";
 
 function MenuItem({ pizza }) {
@@ -43,10 +44,10 @@ function MenuItem({ pizza }) {
           )}
           {
            renderDelete &&
-           <>
-            {/* <UpdateItemQuantity pizzaId={id} quantity={currentQuantity}></UpdateItemQuantity> */}
+           <div className="flex gap-4 ">
+            <UpdateItemQuantity pizzaId={id} quantity={currentQuantity}></UpdateItemQuantity>
             <DeleteItem pizzaId={id}/>
-           </>
+           </div>
           }
            
           
