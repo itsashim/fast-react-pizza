@@ -42,7 +42,8 @@ const isValidPhone = (str) =>
 function CreateOrder() {
   const [withPriority, setWithPriority] = useState(false);
   const cart =  useSelector(getCart); 
-  const username = useSelector(e=> e.user.username)
+  const {username, status: addressStatus, position, address} = useSelector(e=> e.user);
+  const isLoadingAddress = addressStatus  === 'loading';
   const totalCartPrice = useSelector(getTotalCartPrice);
   const priorityPrice = withPriority ? totalCartPrice * 0.2 : 0;
   const totalPrice = totalCartPrice + priorityPrice;
@@ -56,7 +57,6 @@ function CreateOrder() {
     <div className="px-4 py-6">
       <h2 className="text-xl font-bold mb-8">Ready to order? Let&apos;s go!</h2>
     
-      <button onClick={()=> dispatch(fetchAddress())}>Get position</button>
       <Form method="POST">
         <div className="sm:flex items-center mb-5 ">
           <label className="basis-40">First Name</label>
@@ -75,8 +75,17 @@ function CreateOrder() {
         <div className="sm:flex items-center mb-5 ">
           <label className="basis-40 ">Address</label>
           <div className="grow w-full">
-            <input className="input" type="text" name="address" required />
+            <input defaultValue={address} className="input mb-2" disabled={isLoadingAddress} type="text" name="address" required />
+     {  !position.latitude && !position.longitude && <Button type="small" onClick={(e)=> {
+              e.preventDefault();     
+              dispatch(fetchAddress())}
+              
+            }
+            disabled={isLoadingAddress || isLoadingAddress}
+            >Get position
+            </Button>}
           </div>
+
         </div>
 
         <div className="mb-12 flex items-center gap-5">
